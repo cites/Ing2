@@ -10,6 +10,7 @@ public class Usuario {
 	private String contrasenia;
 	private Perfil perfil;
 	private boolean activo;
+	private UsuarioMock UsuarioDBA;
 
 	public int getId() {
 		return id;
@@ -83,11 +84,36 @@ public class Usuario {
 		this.activo = activo;
 	}
 
-	public void nuevo(Usuario usuario) {
-		this.id = usuario.id;
-		this.nombre = usuario.nombre;
-		this.apellido = usuario.apellido;
-		this.telefono = usuario.telefono;
-		this.email = usuario.email;
+	public boolean nuevo() {
+		
+		this.UsuarioDBA = new UsuarioMock();
+		
+		return this.UsuarioDBA.insert(this);
+	
 	}
+	
+	public boolean modificar() {
+		
+		this.UsuarioDBA = new UsuarioMock();
+		
+		return this.UsuarioDBA.update(this);
+		
+	}
+	
+	public boolean eliminar() {
+		
+		this.UsuarioDBA = new UsuarioMock();
+		
+		return this.UsuarioDBA.delete(this.id);
+		
+	}
+	
+	public boolean validarUsuario(String Email, String Password) {
+		
+		this.UsuarioDBA = new UsuarioMock();
+		
+		return this.UsuarioDBA.validarUsuario(Email, Password);
+		
+	}
+
 }
